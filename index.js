@@ -44,6 +44,7 @@ const getNewSubjectForCheck = async () => {
 		}
 	});
 	return response.data.homeworks
+		.filter(data => !data.reviewer)
 		.filter(data => data.lesson_task_experts.map(expert => expert.id === +process.env.USER_ID))
 		.reduce((acc, {task, user, program}) => {
 			return `${acc} \n <b>${task.title}</b>
